@@ -48,7 +48,7 @@ public class NewJFrame extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("VT323", 0, 60)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 255, 51));
-        jLabel2.setText("HACKERMAN");
+        jLabel2.setText("HACKERMAN...");
 
         jLabel3.setFont(new java.awt.Font("VT323", 2, 24)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 255, 51));
@@ -61,11 +61,12 @@ public class NewJFrame extends javax.swing.JFrame {
         jTextArea1.setColumns(20);
         jTextArea1.setFont(new java.awt.Font("VT323", 0, 24)); // NOI18N
         jTextArea1.setForeground(new java.awt.Color(51, 255, 51));
-        jTextArea1.setLineWrap(true);
         jTextArea1.setRows(5);
         jTextArea1.setText("[CLASICO]\n|\n|   |  (\"INTENTA ADIVINAR EL NUMERO\");\n[CLASICO]\n\n|   word: word word:\n|   word_word word word word:\n\n[CLASICO]\n|   |    = ==*word));\n|\n}   );");
+        jTextArea1.setToolTipText("");
         jTextArea1.setBorder(null);
         jTextArea1.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        jTextArea1.setSelectedTextColor(new java.awt.Color(0, 0, 0));
         jTextArea1.setSelectionColor(new java.awt.Color(0, 0, 0));
         jScrollPane1.setViewportView(jTextArea1);
 
@@ -79,11 +80,12 @@ public class NewJFrame extends javax.swing.JFrame {
                         .addGap(104, 104, 104)
                         .addComponent(jLabel2))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(205, 205, 205)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 464, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(272, Short.MAX_VALUE))
+                        .addGap(200, 200, 200)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 517, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(148, 148, 148)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(164, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -92,7 +94,7 @@ public class NewJFrame extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(22, 22, 22))
         );
