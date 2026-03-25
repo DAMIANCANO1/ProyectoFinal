@@ -4,17 +4,20 @@
  */
 package prueba_hackerman.newpackage;
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Random;
 import javax.swing.JTextField;
+import  javax.swing.Timer;
 
 /**
  *
  * @author canod
  */
 public class JugadorEncuentra extends javax.swing.JFrame {
-
     int Secreto = (int) (Math.random() * 100) + 1;
     int Oportunides = 10;
+    Timer time; 
 
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(JugadorEncuentra.class.getName());
 
@@ -23,31 +26,78 @@ public class JugadorEncuentra extends javax.swing.JFrame {
      */
     public JugadorEncuentra() {
         initComponents();
+        //aqui se crea de manera formal un timer que estara contando cada segundo 
+        //de manera en la que cuando el contador llegue a 60 el usuario pierda
+        //se agrega 1000 milisegundos de conteo y el action listener para ser el 
+        //encargado de poder avisar cada que pasa un segundo y dentro del metodo 
+        // se crea una variabler que es la encargada de avisarque el contador a llegado a 60
+        time = new Timer(1000, new ActionListener() {
+            int Contador = 50;
+            public void actionPerformed(ActionEvent e) {
+                Contador--;
+                
+                SalidaContador.setText("ALERTA: RASTREO DEL SISTEMA EN "+Contador);
+                SalidaContador.setForeground(Color.GREEN);
+                
+                if (Contador <=0){
+                    time.stop();
+                    SalidaContador.setText("|RASTREADO|");
+                    SalidaContador.setForeground(Color.red);
+                    Ejecutar1.setEnabled(false);
+                    
+                }
+            }
+        });
+        //Aqui se configuran de que manera se muestran las cajas de texto 
+        //Primero se bloquean para que el usuario no borre o intente 
+        //ingresar informacion desde ahi
         Pistas.setEditable(false);
-        SalidaOportunidades1.setEditable(false);
+        SalidaOportunidades1.setEditable(false);  
+        SalidaContador.setEditable(false);
+        
+        //Se centran los textos para una mejor visualizacion
         Pistas.setHorizontalAlignment(JTextField.CENTER);
         SalidaOportunidades1.setHorizontalAlignment(JTextField.CENTER);
+        SalidaContador.setHorizontalAlignment(JTextField.CENTER);
+        
     }
 
     public void JugadorEnc() {
-        int A = Integer.parseInt(EntradaNumero.getText());
-        SalidaOportunidades1.setText("OPORTUNIDAD: " + Oportunides + " INTENTOS RESTANTES:" + (Oportunides - 1) + " ");
-        Oportunides--;
-        if (A < Secreto) {
-            Pistas.setText("EL NUMERO DEBE DE SER MAYOR");
-        } else if (A > Secreto) {
-            Pistas.setText("EL NUMERO DEBE DE SER MENOR");
-        } else if (A == Secreto) {
-            Pistas.setText("ACCESO AUTORIZADO");
-        }
-        if (Oportunides <=0 ){
-            Pistas.setText("SIN INTENTOS DISPONIBLES");
-            Pistas.setForeground(Color.red);
-            Ejecutar1.setEnabled(false);
-        }
-        
+        //se inicia el timer de cuenta regresiva
+        time.start();
+        //se reciben los datos ingresados por el usuario en la la variable a 
+        //tambien se empieza el contador de oportunidades para el usuario
+        //que se creo en la clase principal y desde aqui se va restando 
+        //cada oportunidad gastada
+        try {
+            int A = Integer.parseInt(EntradaNumero.getText());
+            SalidaOportunidades1.setText("OPORTUNIDAD: " + Oportunides + " INTENTOS RESTANTES:" + (Oportunides - 1) + " ");
+            Oportunides--;
+            if (A < Secreto) {
+                Pistas.setText("EL NUMERO DEBE DE SER MAYOR");
+            } else if (A > Secreto) {
+                Pistas.setText("EL NUMERO DEBE DE SER MENOR");
+            } else if (A == Secreto) {
+                Pistas.setText("ACCESO AUTORIZADO");
+                time.stop();
+            }
+            if (Oportunides <= 0) {
+                Pistas.setText("SIN INTENTOS DISPONIBLES");
+                time.stop();
+                Pistas.setForeground(Color.red);
+                Ejecutar1.setEnabled(false);
+            }
+            //Aqui se hace la forma para detectar errores por ejemplo
+            //una linea vacia o letras ingresadas por error 
+        } catch (NumberFormatException e) {
+            time.stop();
+            Pistas.setText("ERROR: INGRESA NÚMEROS");
+            Pistas.setForeground(Color.ORANGE);
+            EntradaNumero.setText("");
 
+        }
     }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -60,6 +110,7 @@ public class JugadorEncuentra extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         Back = new javax.swing.JButton();
+        SalidaContador = new javax.swing.JTextField();
         Pistas = new javax.swing.JTextField();
         Ejecutar1 = new javax.swing.JButton();
         EntradaNumero = new javax.swing.JTextField();
@@ -80,6 +131,13 @@ public class JugadorEncuentra extends javax.swing.JFrame {
         Back.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 255, 51)));
         Back.addActionListener(this::BackActionPerformed);
         jPanel1.add(Back, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 550, 260, 60));
+
+        SalidaContador.setBackground(new java.awt.Color(0, 0, 0));
+        SalidaContador.setFont(new java.awt.Font("VT323", 0, 24)); // NOI18N
+        SalidaContador.setForeground(new java.awt.Color(0, 255, 0));
+        SalidaContador.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        SalidaContador.addActionListener(this::SalidaContadorActionPerformed);
+        jPanel1.add(SalidaContador, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 117, 360, 40));
 
         Pistas.setBackground(new java.awt.Color(0, 0, 0));
         Pistas.setFont(new java.awt.Font("VT323", 0, 36)); // NOI18N
@@ -131,6 +189,10 @@ public class JugadorEncuentra extends javax.swing.JFrame {
        JugadorEnc();
     }//GEN-LAST:event_Ejecutar1ActionPerformed
 
+    private void SalidaContadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalidaContadorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_SalidaContadorActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -161,6 +223,7 @@ public class JugadorEncuentra extends javax.swing.JFrame {
     private javax.swing.JButton Ejecutar1;
     private javax.swing.JTextField EntradaNumero;
     private javax.swing.JTextField Pistas;
+    private javax.swing.JTextField SalidaContador;
     private javax.swing.JTextField SalidaOportunidades1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
