@@ -26,6 +26,10 @@ public class JugadorEncuentra extends javax.swing.JFrame {
      */
     public JugadorEncuentra() {
         initComponents();
+        //Se crea los valores de la barra de mismo valor que 
+        //el contador para que ese represente el 100%
+        Barra1.setMaximum(50);
+        Barra1.setValue(50);
         //aqui se crea de manera formal un timer que estara contando cada segundo 
         //de manera en la que cuando el contador llegue a 60 el usuario pierda
         //se agrega 1000 milisegundos de conteo y el action listener para ser el 
@@ -39,10 +43,16 @@ public class JugadorEncuentra extends javax.swing.JFrame {
                 SalidaContador.setText("ALERTA: RASTREO DEL SISTEMA EN "+Contador);
                 SalidaContador.setForeground(Color.GREEN);
                 
+                Barra1.setValue(Contador);
+                
                 if (Contador <=0){
                     time.stop();
                     SalidaContador.setText("|RASTREADO|");
+                    Pistas.setText("|RASTREADO|");
+                    SalidaOportunidades1.setText("|RASTREADO|");
                     SalidaContador.setForeground(Color.red);
+                    Pistas.setForeground(Color.red);
+                    SalidaOportunidades1.setForeground(Color.red);
                     Ejecutar1.setEnabled(false);
                     
                 }
@@ -74,11 +84,11 @@ public class JugadorEncuentra extends javax.swing.JFrame {
             SalidaOportunidades1.setText("OPORTUNIDAD: " + Oportunides + " INTENTOS RESTANTES:" + (Oportunides - 1) + " ");
             Oportunides--;
             if (A < Secreto) {
-                Pistas.setText("EL NUMERO DEBE DE SER MAYOR");
+                Pistas.setText("|FALLIDO DEBE SER MAYOR|");
             } else if (A > Secreto) {
-                Pistas.setText("EL NUMERO DEBE DE SER MENOR");
+                Pistas.setText("|FALLIDO DEBE SER MENOR|");
             } else if (A == Secreto) {
-                Pistas.setText("ACCESO AUTORIZADO");
+                Pistas.setText("*****|ACCESO AUTORIZADO SISTEMA VULNERADO|*****");
                 time.stop();
             }
             if (Oportunides <= 0) {
@@ -96,6 +106,7 @@ public class JugadorEncuentra extends javax.swing.JFrame {
             EntradaNumero.setText("");
 
         }
+        Pistas.setForeground(Color.GREEN);
     }
 
 
@@ -109,6 +120,7 @@ public class JugadorEncuentra extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        Barra1 = new javax.swing.JProgressBar();
         Back = new javax.swing.JButton();
         SalidaContador = new javax.swing.JTextField();
         Pistas = new javax.swing.JTextField();
@@ -123,6 +135,12 @@ public class JugadorEncuentra extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(0, 0, 0));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        Barra1.setBackground(new java.awt.Color(0, 0, 0));
+        Barra1.setFont(new java.awt.Font("VT323", 0, 10)); // NOI18N
+        Barra1.setForeground(new java.awt.Color(0, 255, 0));
+        Barra1.setBorder(null);
+        jPanel1.add(Barra1, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 170, 250, 10));
 
         Back.setBackground(new java.awt.Color(0, 0, 0));
         Back.setFont(new java.awt.Font("VT323", 3, 36)); // NOI18N
@@ -220,6 +238,7 @@ public class JugadorEncuentra extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Back;
+    private javax.swing.JProgressBar Barra1;
     private javax.swing.JButton Ejecutar1;
     private javax.swing.JTextField EntradaNumero;
     private javax.swing.JTextField Pistas;
