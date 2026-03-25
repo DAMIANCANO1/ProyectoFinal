@@ -84,9 +84,9 @@ public class JugadorEncuentra extends javax.swing.JFrame {
             SalidaOportunidades1.setText("OPORTUNIDAD: " + Oportunides + " INTENTOS RESTANTES:" + (Oportunides - 1) + " ");
             Oportunides--;
             if (A < Secreto) {
-                Pistas.setText("|FALLIDO DEBE SER MAYOR|");
+                Pistas.setText("|FALLIDO: DEBE SER MAYOR|");
             } else if (A > Secreto) {
-                Pistas.setText("|FALLIDO DEBE SER MENOR|");
+                Pistas.setText("|FALLIDO: DEBE SER MENOR|");
             } else if (A == Secreto) {
                 Pistas.setText("*****|ACCESO AUTORIZADO SISTEMA VULNERADO|*****");
                 time.stop();
