@@ -14,18 +14,19 @@ import  javax.swing.Timer;
  *
  * @author canod
  */
-public class JugadorEncuentra extends javax.swing.JFrame {
+public class Facil extends javax.swing.JFrame {
     int Secreto = (int) (Math.random() * 100) + 1;
-    int Oportunides = 10;
+    int Oportunides = 6;
     Timer time; 
 
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(JugadorEncuentra.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Facil.class.getName());
 
     /**
      * Creates new form JugadorEncuentra
      */
-    public JugadorEncuentra() {
+    public Facil() {
         initComponents();
+        this.setLocationRelativeTo(null);
         //Se crea los valores de la barra de mismo valor que 
         //el contador para que ese represente el 100%
         Barra1.setMaximum(50);
@@ -55,6 +56,9 @@ public class JugadorEncuentra extends javax.swing.JFrame {
                     SalidaOportunidades1.setForeground(Color.red);
                     Ejecutar1.setEnabled(false);
                     
+                    Perdiste perdiste = new Perdiste();
+                    perdiste.setVisible(true);
+                    
                 }
             }
         });
@@ -80,6 +84,7 @@ public class JugadorEncuentra extends javax.swing.JFrame {
         //que se creo en la clase principal y desde aqui se va restando 
         //cada oportunidad gastada
         try {
+            
             int A = Integer.parseInt(EntradaNumero.getText());
             SalidaOportunidades1.setText("OPORTUNIDAD: " + Oportunides + " INTENTOS RESTANTES:" + (Oportunides - 1) + " ");
             Oportunides--;
@@ -88,14 +93,17 @@ public class JugadorEncuentra extends javax.swing.JFrame {
             } else if (A > Secreto) {
                 Pistas.setText("|FALLIDO: DEBE SER MENOR|");
             } else if (A == Secreto) {
-                Pistas.setText("*****|ACCESO AUTORIZADO SISTEMA VULNERADO|*****");
+                Pistas.setText("|ACCESO AUTORIZADO SISTEMA VULNERADO|");
                 time.stop();
+                Ejecutar1.setEnabled(false);
             }
             if (Oportunides <= 0) {
                 Pistas.setText("SIN INTENTOS DISPONIBLES");
                 time.stop();
                 Pistas.setForeground(Color.red);
                 Ejecutar1.setEnabled(false);
+                Perdiste perdiste = new Perdiste();
+                perdiste.setVisible(true);
             }
             //Aqui se hace la forma para detectar errores por ejemplo
             //una linea vacia o letras ingresadas por error 
@@ -161,7 +169,7 @@ public class JugadorEncuentra extends javax.swing.JFrame {
         Pistas.setFont(new java.awt.Font("VT323", 0, 36)); // NOI18N
         Pistas.setForeground(new java.awt.Color(0, 255, 0));
         Pistas.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 255, 0)));
-        jPanel1.add(Pistas, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 320, 440, 60));
+        jPanel1.add(Pistas, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 320, 590, 60));
 
         Ejecutar1.setBackground(new java.awt.Color(0, 0, 0));
         Ejecutar1.setFont(new java.awt.Font("VT323", 0, 24)); // NOI18N
@@ -175,6 +183,7 @@ public class JugadorEncuentra extends javax.swing.JFrame {
         EntradaNumero.setFont(new java.awt.Font("VT323", 0, 36)); // NOI18N
         EntradaNumero.setForeground(new java.awt.Color(0, 255, 0));
         EntradaNumero.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 255, 0)));
+        EntradaNumero.addActionListener(this::EntradaNumeroActionPerformed);
         jPanel1.add(EntradaNumero, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 240, 510, 60));
 
         SalidaOportunidades1.setBackground(new java.awt.Color(0, 0, 0));
@@ -186,8 +195,8 @@ public class JugadorEncuentra extends javax.swing.JFrame {
         jLabel2.setBackground(new java.awt.Color(0, 0, 0));
         jLabel2.setFont(new java.awt.Font("VT323", 0, 12)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(51, 255, 51));
-        jLabel2.setText("MAXIMO 10 INTENTOS");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 310, -1, -1));
+        jLabel2.setText("MAXIMO 7 INTENTOS");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 310, -1, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenn/Captura de pantalla 2026-03-18 144810.png"))); // NOI18N
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(99, 0, -1, 666));
@@ -211,7 +220,11 @@ public class JugadorEncuentra extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_SalidaContadorActionPerformed
 
-    /**
+    private void EntradaNumeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EntradaNumeroActionPerformed
+        Ejecutar1.doClick();
+    }//GEN-LAST:event_EntradaNumeroActionPerformed
+
+    /**0
      * @param args the command line arguments
      */
     public static void main(String args[]) {
@@ -233,7 +246,7 @@ public class JugadorEncuentra extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new JugadorEncuentra().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new Facil().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -23,6 +23,7 @@ public class Menu extends javax.swing.JFrame {
      */
     public Menu() {
         initComponents();
+        this.setLocationRelativeTo(null);
         
     }
 
@@ -52,25 +53,25 @@ public class Menu extends javax.swing.JFrame {
         SalirBtn.setForeground(new java.awt.Color(255, 0, 0));
         SalirBtn.setText("CERRAR JUEGO");
         SalirBtn.addActionListener(this::SalirBtnActionPerformed);
-        jPanel1.add(SalirBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 690, 190, -1));
+        jPanel1.add(SalirBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 590, 190, 30));
 
         JugadorAdivina.setBackground(new java.awt.Color(0, 0, 0));
         JugadorAdivina.setFont(new java.awt.Font("VT323", 0, 14)); // NOI18N
         JugadorAdivina.setForeground(new java.awt.Color(102, 255, 51));
         JugadorAdivina.setText("JUGADOR ADIVINA");
         JugadorAdivina.addActionListener(this::JugadorAdivinaActionPerformed);
-        jPanel1.add(JugadorAdivina, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 690, 190, -1));
+        jPanel1.add(JugadorAdivina, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 590, 190, 30));
 
         PcEncuentra.setBackground(new java.awt.Color(0, 0, 0));
         PcEncuentra.setFont(new java.awt.Font("VT323", 0, 14)); // NOI18N
         PcEncuentra.setForeground(new java.awt.Color(102, 255, 51));
         PcEncuentra.setText("PC ENCUENTRA");
         PcEncuentra.addActionListener(this::PcEncuentraActionPerformed);
-        jPanel1.add(PcEncuentra, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 690, 190, -1));
+        jPanel1.add(PcEncuentra, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 590, 190, 30));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenn/imagenhacker1.png"))); // NOI18N
         jLabel2.setText("jLabel2");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1231, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1231, 730));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -80,7 +81,7 @@ public class Menu extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -97,7 +98,7 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_SalirBtnActionPerformed
 
     private void JugadorAdivinaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JugadorAdivinaActionPerformed
-        JugadorEncuentra ventana = new JugadorEncuentra();
+        Facil ventana = new Facil();
         ventana.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_JugadorAdivinaActionPerformed
