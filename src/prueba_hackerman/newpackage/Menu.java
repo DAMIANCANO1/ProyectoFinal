@@ -98,9 +98,10 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_SalirBtnActionPerformed
 
     private void JugadorAdivinaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JugadorAdivinaActionPerformed
-        Facil ventana = new Facil();
-        ventana.setVisible(true);
+        MenuDificultades menuDificultades = new MenuDificultades();
+        menuDificultades.setVisible(true);
         this.dispose();
+        
     }//GEN-LAST:event_JugadorAdivinaActionPerformed
 
     /**

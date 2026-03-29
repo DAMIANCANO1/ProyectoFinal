@@ -96,6 +96,8 @@ public class Facil extends javax.swing.JFrame {
                 Pistas.setText("|ACCESO AUTORIZADO SISTEMA VULNERADO|");
                 time.stop();
                 Ejecutar1.setEnabled(false);
+                Ganaste ganaste = new Ganaste();
+                ganaste.setVisible(true);
             }
             if (Oportunides <= 0) {
                 Pistas.setText("SIN INTENTOS DISPONIBLES");
@@ -137,6 +139,7 @@ public class Facil extends javax.swing.JFrame {
         SalidaOportunidades1 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -201,6 +204,9 @@ public class Facil extends javax.swing.JFrame {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenn/Captura de pantalla 2026-03-18 144810.png"))); // NOI18N
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(99, 0, -1, 666));
 
+        jLabel3.setText("jLabel3");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 180, -1, -1));
+
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
@@ -259,6 +265,7 @@ public class Facil extends javax.swing.JFrame {
     private javax.swing.JTextField SalidaOportunidades1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }
