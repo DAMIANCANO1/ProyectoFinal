@@ -60,7 +60,7 @@ public class Medio extends javax.swing.JFrame {
         TPRestante.setHorizontalAlignment(JTextField.CENTER);
     }
 
-    public void NumSecreto() {
+    private void NumSecreto() {
         System.out.println(Secreto);
         arr[2] = Secreto % 10;
         arr[1] = (Secreto / 10) % 10;
@@ -179,6 +179,7 @@ public class Medio extends javax.swing.JFrame {
         Back.setFont(new java.awt.Font("VT323", 2, 36)); // NOI18N
         Back.setForeground(new java.awt.Color(255, 170, 0));
         Back.setText("R E G R E S A R");
+        Back.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         Back.addActionListener(this::BackActionPerformed);
         jPanel1.add(Back, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 560, 320, -1));
 
@@ -186,6 +187,7 @@ public class Medio extends javax.swing.JFrame {
         Ejecutar1.setForeground(new java.awt.Color(255, 170, 0));
         Ejecutar1.setText("EJECUTAR");
         Ejecutar1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        Ejecutar1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         Ejecutar1.addActionListener(this::Ejecutar1ActionPerformed);
         jPanel1.add(Ejecutar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(838, 300, 140, -1));
 
@@ -197,12 +199,12 @@ public class Medio extends javax.swing.JFrame {
         jPanel1.add(SalidaContador, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 220, 100, 30));
 
         TPRestante.setBackground(new java.awt.Color(0, 0, 0));
-        TPRestante.setFont(new java.awt.Font("VT323", 0, 24)); // NOI18N
+        TPRestante.setFont(new java.awt.Font("VT323", 0, 36)); // NOI18N
         TPRestante.setForeground(new java.awt.Color(255, 170, 0));
         TPRestante.setText("TIEMPO RESTANTE ");
         TPRestante.setBorder(null);
         TPRestante.addActionListener(this::TPRestanteActionPerformed);
-        jPanel1.add(TPRestante, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 220, 180, 30));
+        jPanel1.add(TPRestante, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 220, 220, 30));
 
         SalidaPistas.setBackground(new java.awt.Color(0, 0, 0));
         SalidaPistas.setFont(new java.awt.Font("VT323", 0, 36)); // NOI18N
@@ -253,7 +255,8 @@ public class Medio extends javax.swing.JFrame {
     }//GEN-LAST:event_Ejecutar1ActionPerformed
 
     private void BackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackActionPerformed
-         Menu menu = new Menu();
+        time.stop();
+        Menu menu = new Menu();
         menu.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_BackActionPerformed

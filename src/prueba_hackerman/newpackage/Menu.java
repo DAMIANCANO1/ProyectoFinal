@@ -49,23 +49,29 @@ public class Menu extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         SalirBtn.setBackground(new java.awt.Color(0, 0, 0));
-        SalirBtn.setFont(new java.awt.Font("VT323", 0, 14)); // NOI18N
+        SalirBtn.setFont(new java.awt.Font("VT323", 0, 18)); // NOI18N
         SalirBtn.setForeground(new java.awt.Color(255, 0, 0));
         SalirBtn.setText("CERRAR JUEGO");
+        SalirBtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 0)));
+        SalirBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         SalirBtn.addActionListener(this::SalirBtnActionPerformed);
         jPanel1.add(SalirBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 590, 190, 30));
 
         JugadorAdivina.setBackground(new java.awt.Color(0, 0, 0));
-        JugadorAdivina.setFont(new java.awt.Font("VT323", 0, 14)); // NOI18N
+        JugadorAdivina.setFont(new java.awt.Font("VT323", 0, 18)); // NOI18N
         JugadorAdivina.setForeground(new java.awt.Color(102, 255, 51));
         JugadorAdivina.setText("JUGADOR ADIVINA");
+        JugadorAdivina.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 255, 51)));
+        JugadorAdivina.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         JugadorAdivina.addActionListener(this::JugadorAdivinaActionPerformed);
         jPanel1.add(JugadorAdivina, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 590, 190, 30));
 
         PcEncuentra.setBackground(new java.awt.Color(0, 0, 0));
-        PcEncuentra.setFont(new java.awt.Font("VT323", 0, 14)); // NOI18N
+        PcEncuentra.setFont(new java.awt.Font("VT323", 0, 18)); // NOI18N
         PcEncuentra.setForeground(new java.awt.Color(102, 255, 51));
         PcEncuentra.setText("PC ENCUENTRA");
+        PcEncuentra.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 255, 0)));
+        PcEncuentra.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         PcEncuentra.addActionListener(this::PcEncuentraActionPerformed);
         jPanel1.add(PcEncuentra, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 590, 190, 30));
 

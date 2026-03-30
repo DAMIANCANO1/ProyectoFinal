@@ -158,6 +158,7 @@ public class Facil extends javax.swing.JFrame {
         Back.setForeground(new java.awt.Color(51, 255, 51));
         Back.setText("R E G R E S A R");
         Back.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 255, 51)));
+        Back.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         Back.addActionListener(this::BackActionPerformed);
         jPanel1.add(Back, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 550, 260, 60));
 
@@ -179,6 +180,7 @@ public class Facil extends javax.swing.JFrame {
         Ejecutar1.setForeground(new java.awt.Color(51, 255, 51));
         Ejecutar1.setText("I N T E N T A R");
         Ejecutar1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 255, 51)));
+        Ejecutar1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         Ejecutar1.addActionListener(this::Ejecutar1ActionPerformed);
         jPanel1.add(Ejecutar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 240, 260, 60));
 
@@ -213,7 +215,8 @@ public class Facil extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackActionPerformed
-         Menu menu = new Menu();
+        time.stop();
+        Menu menu = new Menu();
         menu.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_BackActionPerformed
