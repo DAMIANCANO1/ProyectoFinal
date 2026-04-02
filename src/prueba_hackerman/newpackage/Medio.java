@@ -32,6 +32,8 @@ public class Medio extends javax.swing.JFrame {
     public Medio() {
         initComponents();
         this.setLocationRelativeTo(null);
+        Audio.iniciarMusicaFondo("/Sonidos/musicaMedio.wav");
+        
         NumSecreto();
 
         time = new Timer(1000, new ActionListener() {
@@ -40,8 +42,16 @@ public class Medio extends javax.swing.JFrame {
             public void actionPerformed(ActionEvent e) {
                 Contador--;
                 SalidaContador.setText(Contador + " ");
+                
+                if(Contador <= 10 && Contador > 0){
+                    Audio.reproducirEfecto("/Sonidos/beep.wav"); 
+                    SalidaContador.setForeground(java.awt.Color.RED);
+                }
+                
                 if (Contador == 0) {
                     time.stop();
+                    Audio.detenerMusicaFondo();
+                    Audio.reproducirEfecto("/Sonidos/perder.wav");
                     Ejecutar1.setEnabled(false);
                     Perdiste perdiste = new Perdiste();
                     perdiste.setVisible(true);
@@ -87,6 +97,7 @@ public class Medio extends javax.swing.JFrame {
             
             if(A<100 || A>999){
                 SalidaPistas.setText("FORMATO INVALIDO: REQUIERE PUERTO DE 3 DIGITOS (100-999)");
+                Audio.reproducirEfecto("/Sonidos/errores.wav");
                 return;
             }
             
@@ -100,6 +111,8 @@ public class Medio extends javax.swing.JFrame {
             if (A == Secreto) {
                 SalidaPistas.setText("|ACCESO AUTORIZADO SISTEMA VULNERADO|");
                 time.stop();
+                Audio.detenerMusicaFondo();
+                Audio.reproducirEfecto("/Sonidos/Ganar.wav");
                 Ejecutar1.setEnabled(false);
                 Ganaste ganaste = new Ganaste();
                 ganaste.setVisible(true);
@@ -134,6 +147,8 @@ public class Medio extends javax.swing.JFrame {
                 Correcto = 0;
                 if (Oportunidades <= 0) {
                     time.stop();
+                    Audio.detenerMusicaFondo();
+                    Audio.reproducirEfecto("/Sonidos/perder.wav");
                     SalidaPistas.setText("SISTEMA BLOQUEADO");
                     SalidaOportunidades1.setText("|RASTREADO|");
                     SalidaPistas.setForeground(Color.red);
@@ -145,6 +160,7 @@ public class Medio extends javax.swing.JFrame {
 
             }
         } catch (Exception e) {
+            Audio.reproducirEfecto("/Sonidos/perder.wav");
             SalidaPistas.setText("ERROR CRITICO: INGRESA SOLO NUMEROS");
             EntradaNumeros.setText("");
         }
@@ -204,7 +220,7 @@ public class Medio extends javax.swing.JFrame {
         TPRestante.setText("TIEMPO RESTANTE ");
         TPRestante.setBorder(null);
         TPRestante.addActionListener(this::TPRestanteActionPerformed);
-        jPanel1.add(TPRestante, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 220, 220, 30));
+        jPanel1.add(TPRestante, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 220, 220, 30));
 
         SalidaPistas.setBackground(new java.awt.Color(0, 0, 0));
         SalidaPistas.setFont(new java.awt.Font("VT323", 0, 36)); // NOI18N
@@ -251,11 +267,14 @@ public class Medio extends javax.swing.JFrame {
     }//GEN-LAST:event_SalidaPistasActionPerformed
 
     private void Ejecutar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Ejecutar1ActionPerformed
+        Audio.reproducirEfecto("/Sonidos/Boton.wav");
         Med();
     }//GEN-LAST:event_Ejecutar1ActionPerformed
 
     private void BackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackActionPerformed
         time.stop();
+        Audio.detenerMusicaFondo();
+        Audio.reproducirEfecto("/Sonidos/Boton.wav");
         Menu menu = new Menu();
         menu.setVisible(true);
         this.dispose();

@@ -20,7 +20,6 @@ import static prueba_hackerman.newpackage.Medio.ImprimeArr;
  * @author canod
  */
 public class Dificil extends javax.swing.JFrame {
-
     Random random = new Random();
     Timer time;
     int Secreto = (int) random.nextInt(9000) + 1000;
@@ -37,6 +36,8 @@ public class Dificil extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         initComponents();
         this.setLocationRelativeTo(null);
+        
+        Audio.iniciarMusicaFondo("/Sonidos/Musica_Dificil.wav");
 
         time = new Timer(1000, new ActionListener() {
             int Contador = 90;
@@ -44,8 +45,13 @@ public class Dificil extends javax.swing.JFrame {
             public void actionPerformed(ActionEvent e) {
                 Contador--;
                 STimer.setText(Contador + " ");
+                if(Contador<=10 && Contador >0){
+                    Audio.reproducirEfecto("/Sonidos/Beep.wav");
+                }
                 if (Contador == 0) {
                     time.stop();
+                    Audio.detenerMusicaFondo();
+                    Audio.reproducirEfecto("/Sonidos/Perder.wav");
                     Ejecutar1.setEnabled(false);
                     Perdiste perdiste = new Perdiste();
                     perdiste.setVisible(true);
@@ -115,6 +121,7 @@ public class Dificil extends javax.swing.JFrame {
             int A = Integer.parseInt(ENumeros.getText());
 
             if (A < 1000 || A > 9999) {
+                Audio.reproducirEfecto("/Sonidos/errores.wav");
                 SPistas.setText("FORMATO INVALIDO: REQUIERE PUERTO DE 4 DIGITOS (1000-9999)");
                 return;
             }
@@ -126,6 +133,8 @@ public class Dificil extends javax.swing.JFrame {
             int Correcto = 0;
 
             if (A == Secreto) {
+                Audio.detenerMusicaFondo();
+                Audio.reproducirEfecto("/Sonidos/Ganar.wav");
                 SPistas.setText("|ACCESO AUTORIZADO SISTEMA VULNERADO|");
                 time.stop();
                 Ejecutar1.setEnabled(false);
@@ -165,6 +174,8 @@ public class Dificil extends javax.swing.JFrame {
                 Correcto = 0;
                 if (Oportunidades <= 0) {
                     time.stop();
+                    Audio.detenerMusicaFondo();
+                    Audio.reproducirEfecto("/Sonidos/Perder.wav");
                     SPistas.setText("SISTEMA BLOQUEADO");
                     SOportunidades.setText("|RASTREADO|");
                     SPistas.setForeground(Color.red);
@@ -177,6 +188,7 @@ public class Dificil extends javax.swing.JFrame {
             }
 
         } catch (Exception e) {
+            Audio.reproducirEfecto("/Sonidos/errores.wav");
             SPistas.setText("ERROR CRITICO: INGRESA SOLO NUMEROS");
             ENumeros.setText("");
         }
@@ -254,13 +266,15 @@ public class Dificil extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void Regresar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Regresar2ActionPerformed
-
+        Audio.detenerMusicaFondo();
+        Audio.reproducirEfecto("/Sonidos/Boton.wav");
         Menu menu = new Menu();
         menu.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_Regresar2ActionPerformed
 
     private void Ejecutar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Ejecutar1ActionPerformed
+        Audio.reproducirEfecto("/Sonidos/Boton.wav");
         Dif();
     }//GEN-LAST:event_Ejecutar1ActionPerformed
 
@@ -269,6 +283,7 @@ public class Dificil extends javax.swing.JFrame {
     }//GEN-LAST:event_ENumerosActionPerformed
 
     private void BtnPistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPistaActionPerformed
+        Audio.reproducirEfecto("/Sonidos/Pistass.wav");
         if (Oportunidades <= 1) {
             SPistas.setText("ERROR: SE REQUIEREN MINIMO 2 INTENTOS");
             return;

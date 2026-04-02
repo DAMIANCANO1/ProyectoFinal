@@ -27,6 +27,7 @@ public class Facil extends javax.swing.JFrame {
     public Facil() {
         initComponents();
         this.setLocationRelativeTo(null);
+        Audio.iniciarMusicaFondo("/Sonidos/musica_Facil.wav");
         //Se crea los valores de la barra de mismo valor que 
         //el contador para que ese represente el 100%
         Barra1.setMaximum(50);
@@ -46,8 +47,15 @@ public class Facil extends javax.swing.JFrame {
                 
                 Barra1.setValue(Contador);
                 
+                if(Contador <= 10 && Contador > 0){
+                    Audio.reproducirEfecto("/Sonidos/beep.wav"); 
+                    SalidaContador.setForeground(Color.RED);
+                }
+                
                 if (Contador <=0){
                     time.stop();
+                    Audio.detenerMusicaFondo();
+                    Audio.reproducirEfecto("/Sonidos/perder.wav");
                     SalidaContador.setText("|RASTREADO|");
                     Pistas.setText("|RASTREADO|");
                     SalidaOportunidades1.setText("|RASTREADO|");
@@ -89,19 +97,25 @@ public class Facil extends javax.swing.JFrame {
             SalidaOportunidades1.setText("OPORTUNIDAD: " + Oportunides + " INTENTOS RESTANTES:" + (Oportunides - 1) + " ");
             Oportunides--;
             if (A < Secreto) {
+                Audio.reproducirEfecto("/Sonidos/errores.wav");
                 Pistas.setText("|FALLIDO: DEBE SER MAYOR|");
             } else if (A > Secreto) {
+                Audio.reproducirEfecto("/Sonidos/errores.wav");
                 Pistas.setText("|FALLIDO: DEBE SER MENOR|");
             } else if (A == Secreto) {
+                Audio.detenerMusicaFondo();
+                Audio.reproducirEfecto("/Sonidos/Ganar.wav");
                 Pistas.setText("|ACCESO AUTORIZADO SISTEMA VULNERADO|");
                 time.stop();
                 Ejecutar1.setEnabled(false);
                 Ganaste ganaste = new Ganaste();
                 ganaste.setVisible(true);
             }
-            if (Oportunides <= 0) {
+            if (Oportunides <= 0 && A != Secreto) {
                 Pistas.setText("SIN INTENTOS DISPONIBLES");
                 time.stop();
+                Audio.detenerMusicaFondo();
+                Audio.reproducirEfecto("/Sonidos/perder.wav");
                 Pistas.setForeground(Color.red);
                 Ejecutar1.setEnabled(false);
                 Perdiste perdiste = new Perdiste();
@@ -110,6 +124,7 @@ public class Facil extends javax.swing.JFrame {
             //Aqui se hace la forma para detectar errores por ejemplo
             //una linea vacia o letras ingresadas por error 
         } catch (NumberFormatException e) {
+            Audio.reproducirEfecto("/Sonidos/errores.wav");
             time.stop();
             Pistas.setText("ERROR: INGRESA NÚMEROS");
             Pistas.setForeground(Color.ORANGE);
@@ -216,6 +231,8 @@ public class Facil extends javax.swing.JFrame {
 
     private void BackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackActionPerformed
         time.stop();
+        Audio.detenerMusicaFondo();
+        Audio.reproducirEfecto("/Sonidos/Boton.wav");
         Menu menu = new Menu();
         menu.setVisible(true);
         this.dispose();

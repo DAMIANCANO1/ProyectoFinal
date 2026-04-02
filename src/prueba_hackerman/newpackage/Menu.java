@@ -10,11 +10,13 @@ import java.io.InputStream;
 import java.awt.FontFormatException;
 import java.io.IOException;
 
+
 /**
  *
  * @author Damian
  */
 public class Menu extends javax.swing.JFrame {
+    javax.sound.sampled.Clip clipMenu;
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Menu.class.getName());
 
@@ -24,7 +26,22 @@ public class Menu extends javax.swing.JFrame {
     public Menu() {
         initComponents();
         this.setLocationRelativeTo(null);
-        
+        iniciarMusicaMenu();
+         
+    }
+    
+    public void iniciarMusicaMenu() {
+        try {
+            java.net.URL url = getClass().getResource("/Sonidos/musicamenu.wav");
+            if (url != null) {
+                javax.sound.sampled.AudioInputStream audioIn = javax.sound.sampled.AudioSystem.getAudioInputStream(url);
+                clipMenu = javax.sound.sampled.AudioSystem.getClip();
+                clipMenu.open(audioIn);
+                clipMenu.loop(javax.sound.sampled.Clip.LOOP_CONTINUOUSLY); 
+            }
+        } catch (Exception e) {
+            System.out.println("HACKERMAN LOG: Error en música de menú -> " + e.getMessage());
+        }
     }
 
     /**
@@ -49,35 +66,34 @@ public class Menu extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         SalirBtn.setBackground(new java.awt.Color(0, 0, 0));
-        SalirBtn.setFont(new java.awt.Font("VT323", 0, 18)); // NOI18N
+        SalirBtn.setFont(new java.awt.Font("VT323", 0, 24)); // NOI18N
         SalirBtn.setForeground(new java.awt.Color(255, 0, 0));
         SalirBtn.setText("CERRAR JUEGO");
         SalirBtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 0)));
         SalirBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         SalirBtn.addActionListener(this::SalirBtnActionPerformed);
-        jPanel1.add(SalirBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 590, 190, 30));
+        jPanel1.add(SalirBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 560, 350, 40));
 
         JugadorAdivina.setBackground(new java.awt.Color(0, 0, 0));
-        JugadorAdivina.setFont(new java.awt.Font("VT323", 0, 18)); // NOI18N
+        JugadorAdivina.setFont(new java.awt.Font("VT323", 0, 24)); // NOI18N
         JugadorAdivina.setForeground(new java.awt.Color(102, 255, 51));
         JugadorAdivina.setText("JUGADOR ADIVINA");
         JugadorAdivina.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 255, 51)));
         JugadorAdivina.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         JugadorAdivina.addActionListener(this::JugadorAdivinaActionPerformed);
-        jPanel1.add(JugadorAdivina, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 590, 190, 30));
+        jPanel1.add(JugadorAdivina, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 560, 350, 40));
 
         PcEncuentra.setBackground(new java.awt.Color(0, 0, 0));
-        PcEncuentra.setFont(new java.awt.Font("VT323", 0, 18)); // NOI18N
+        PcEncuentra.setFont(new java.awt.Font("VT323", 0, 24)); // NOI18N
         PcEncuentra.setForeground(new java.awt.Color(102, 255, 51));
         PcEncuentra.setText("PC ENCUENTRA");
         PcEncuentra.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 255, 0)));
         PcEncuentra.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         PcEncuentra.addActionListener(this::PcEncuentraActionPerformed);
-        jPanel1.add(PcEncuentra, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 590, 190, 30));
+        jPanel1.add(PcEncuentra, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 560, 350, 40));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenn/imagenhacker1.png"))); // NOI18N
-        jLabel2.setText("jLabel2");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1231, 730));
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenn/menu_principal.png"))); // NOI18N
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1170, 660));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -94,16 +110,25 @@ public class Menu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void PcEncuentraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PcEncuentraActionPerformed
+        if (clipMenu != null && clipMenu.isRunning()) {
+            clipMenu.stop();
+        }
+        Audio.reproducirEfecto("/Sonidos/Boton.wav");
         PcEncuentra ventana = new PcEncuentra();
         ventana.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_PcEncuentraActionPerformed
 
     private void SalirBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalirBtnActionPerformed
+        Audio.reproducirEfecto("/Sonidos/Boton.wav");
         System.exit(0);
     }//GEN-LAST:event_SalirBtnActionPerformed
 
     private void JugadorAdivinaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JugadorAdivinaActionPerformed
+       if (clipMenu != null && clipMenu.isRunning()) {
+            clipMenu.stop();
+        }
+        Audio.reproducirEfecto("/Sonidos/Boton.wav");
         MenuDificultades menuDificultades = new MenuDificultades();
         menuDificultades.setVisible(true);
         this.dispose();
