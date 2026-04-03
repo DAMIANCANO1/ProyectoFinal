@@ -4,19 +4,99 @@
  */
 package prueba_hackerman.newpackage;
 
+import java.awt.Color;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+
 /**
  *
  * @author canod
  */
 public class PcEncuentra extends javax.swing.JFrame {
-    
+
+    java.util.ArrayList<Integer> PosiblesRespuestas = new java.util.ArrayList<>();
+    int intentoActualPC = 0;
+    int intentosRealizados = 0;
+    java.util.Random random = new java.util.Random();
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(PcEncuentra.class.getName());
 
-    /**
-     * Creates new form PcEncuentra
-     */
     public PcEncuentra() {
+        JOptionPane.showMessageDialog(null, "PARA QUE EL JUEGO FUNCIONE DEBERAS RESPONDER CONFORME A TU NUMERO SECRETO\n "
+                + "SE RECOMIENDA UNA HOJA Y LAPIZ PARA NO PERDERSE");
+        Audio.iniciarMusicaFondo("/Sonidos/PCENCUENTRA.wav");
         initComponents();
+        this.setLocationRelativeTo(null);
+
+        PosiblesRespuestas.clear();
+        for (int i = 1000; i <= 9999; i++) {
+            PosiblesRespuestas.add(i);
+        }
+        HacerIntento();
+        SIntentosPC.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        SIntentosPC.setEditable(false);
+        Invisible();
+    }
+    public void Invisible(){
+        BtnRegresar.setOpaque(false);
+        BtnRegresar.setContentAreaFilled(false);
+        BtnRegresar.setBorderPainted(false);
+        BtnRegresar.setFocusPainted(false);
+        BtnRegresar.setText("");
+        BtnRegresar.setBackground(new Color(0,0,0,0));
+
+    }
+
+    public void HacerIntento() {
+        if (PosiblesRespuestas.isEmpty()) {
+            SIntentosPC.setText("ERROR");
+            Ejecutar.setEnabled(false);
+            return;
+        }
+        int NumAleatorio = random.nextInt(PosiblesRespuestas.size());
+        intentoActualPC = PosiblesRespuestas.get(NumAleatorio);
+        intentosRealizados++;
+
+        SIntentosPC.setText(intentoActualPC + " ");
+    }
+
+    public int[] CrearARR(int Numero) {
+        int[] arreglo = new int[4];
+        arreglo[3] = Numero % 10;
+        arreglo[2] = (Numero / 10) % 10;
+        arreglo[1] = (Numero / 100) % 10;
+        arreglo[0] = Numero / 1000;
+        return arreglo;
+    }
+
+    public int[] Comparar(int[] Secreto, int[] Intento) {
+        int Fijas = 0;
+        int Picas = 0;
+
+        boolean[] secretoUsado = new boolean[4];
+        boolean[] intentoUsado = new boolean[4];
+
+        for (int i = 0; i < 4; i++) {
+            if (Secreto[i] == Intento[i]) {
+                Fijas++;
+                secretoUsado[i] = true;
+                intentoUsado[i] = true;
+            }
+        }
+
+        for (int i = 0; i < 4; i++) {
+            if (!intentoUsado[i]) {
+                for (int j = 0; j < 4; j++) {
+                    if (!secretoUsado[j] && Intento[i] == Secreto[j]) {
+                        Picas++;
+                        secretoUsado[j] = true;
+                        intentoUsado[i] = true;
+                        break;
+                    }
+                }
+            }
+        }
+        return new int[]{Fijas, Picas};
     }
 
     /**
@@ -28,21 +108,102 @@ public class PcEncuentra extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        SIntentosPC = new javax.swing.JTextField();
+        EntradaPicas = new javax.swing.JTextField();
+        EntradaFijas = new javax.swing.JTextField();
+        BtnRegresar = new javax.swing.JButton();
+        Ejecutar = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 885, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 705, Short.MAX_VALUE)
-        );
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        SIntentosPC.setBackground(new java.awt.Color(20, 5, 35));
+        SIntentosPC.setFont(new java.awt.Font("VT323", 0, 48)); // NOI18N
+        SIntentosPC.setForeground(new java.awt.Color(180, 50, 255));
+        SIntentosPC.setBorder(null);
+        getContentPane().add(SIntentosPC, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 180, 910, 70));
+
+        EntradaPicas.setBackground(new java.awt.Color(20, 5, 35));
+        EntradaPicas.setFont(new java.awt.Font("VT323", 0, 24)); // NOI18N
+        EntradaPicas.setForeground(new java.awt.Color(180, 50, 255));
+        EntradaPicas.setBorder(null);
+        getContentPane().add(EntradaPicas, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 300, 40, 30));
+
+        EntradaFijas.setBackground(new java.awt.Color(20, 5, 35));
+        EntradaFijas.setFont(new java.awt.Font("VT323", 0, 18)); // NOI18N
+        EntradaFijas.setForeground(new java.awt.Color(180, 50, 255));
+        EntradaFijas.setBorder(null);
+        getContentPane().add(EntradaFijas, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 302, 40, 30));
+
+        BtnRegresar.setText("jButton1");
+        BtnRegresar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        BtnRegresar.addActionListener(this::BtnRegresarActionPerformed);
+        getContentPane().add(BtnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 580, 370, 70));
+
+        Ejecutar.setBackground(new java.awt.Color(20, 5, 35));
+        Ejecutar.setFont(new java.awt.Font("VT323", 0, 36)); // NOI18N
+        Ejecutar.setForeground(new java.awt.Color(180, 50, 255));
+        Ejecutar.setText("E J E C U T A R");
+        Ejecutar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(180, 50, 255)));
+        Ejecutar.addActionListener(this::EjecutarActionPerformed);
+        getContentPane().add(Ejecutar, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 500, 250, 50));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenn/pc_infiltra.png"))); // NOI18N
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void EjecutarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EjecutarActionPerformed
+        Audio.reproducirEfecto("/Sonidos/Boton.wav");
+        try {
+            
+            int fijasUsuario = Integer.parseInt(EntradaFijas.getText());
+            int picasUsuario = Integer.parseInt(EntradaPicas.getText());
+
+            if (fijasUsuario + picasUsuario > 4) {
+                 Audio.reproducirEfecto("/Sonidos/errores.wav");
+                SIntentosPC.setText("ERROR: SUMA MÁS DE 4");
+                return;
+            }
+
+            if (fijasUsuario == 4) {
+                SIntentosPC.setText("| RASTREADO EN " + intentosRealizados + " INTENTOS |");
+                SIntentosPC.setForeground(Color.RED);
+                Ejecutar.setEnabled(false);
+                return;
+            }
+
+            int[] intentoArr = CrearARR(intentoActualPC);
+
+            for (int i = PosiblesRespuestas.size() - 1; i >= 0; i--) {
+                int posibleNumero = PosiblesRespuestas.get(i);
+                int[] posibleArr = CrearARR(posibleNumero);
+
+                int[] resultado = Comparar(posibleArr, intentoArr);
+
+                if (resultado[0] != fijasUsuario || resultado[1] != picasUsuario) {
+                    PosiblesRespuestas.remove(i);
+                }
+            }
+
+            EntradaFijas.setText("");
+            EntradaPicas.setText("");
+            HacerIntento();
+        } catch (NumberFormatException e) {
+             Audio.reproducirEfecto("/Sonidos/errores.wav");
+            SIntentosPC.setText("ERROR: INGRESA NÚMEROS");
+        }
+    }//GEN-LAST:event_EjecutarActionPerformed
+
+    private void BtnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRegresarActionPerformed
+        Audio.detenerMusicaFondo();
+        Audio.reproducirEfecto("/Sonidos/Boton.wav");
+        Menu menu = new Menu();
+        menu.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_BtnRegresarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -70,5 +231,11 @@ public class PcEncuentra extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BtnRegresar;
+    private javax.swing.JButton Ejecutar;
+    private javax.swing.JTextField EntradaFijas;
+    private javax.swing.JTextField EntradaPicas;
+    private javax.swing.JTextField SIntentosPC;
+    private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

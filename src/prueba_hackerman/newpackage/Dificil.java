@@ -33,10 +33,9 @@ public class Dificil extends javax.swing.JFrame {
 
     public Dificil() {
         NumSecret();
-        this.setLocationRelativeTo(null);
         initComponents();
         this.setLocationRelativeTo(null);
-        
+    
         Audio.iniciarMusicaFondo("/Sonidos/Musica_Dificil.wav");
 
         time = new Timer(1000, new ActionListener() {
