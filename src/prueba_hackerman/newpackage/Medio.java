@@ -220,7 +220,7 @@ public class Medio extends javax.swing.JFrame {
         TPRestante.setText("TIEMPO RESTANTE ");
         TPRestante.setBorder(null);
         TPRestante.addActionListener(this::TPRestanteActionPerformed);
-        jPanel1.add(TPRestante, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 220, 220, 30));
+        jPanel1.add(TPRestante, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 220, 230, 30));
 
         SalidaPistas.setBackground(new java.awt.Color(0, 0, 0));
         SalidaPistas.setFont(new java.awt.Font("VT323", 0, 36)); // NOI18N

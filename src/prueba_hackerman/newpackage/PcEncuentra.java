@@ -22,11 +22,11 @@ public class PcEncuentra extends javax.swing.JFrame {
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(PcEncuentra.class.getName());
 
     public PcEncuentra() {
-        JOptionPane.showMessageDialog(null, "PARA QUE EL JUEGO FUNCIONE DEBERAS RESPONDER CONFORME A TU NUMERO SECRETO\n "
-                + "SE RECOMIENDA UNA HOJA Y LAPIZ PARA NO PERDERSE");
         Audio.iniciarMusicaFondo("/Sonidos/PCENCUENTRA.wav");
         initComponents();
         this.setLocationRelativeTo(null);
+        JOptionPane.showMessageDialog(null, "PIENSA EN UN NUMERO DE 4 DIGITOS \n PARA QUE EL JUEGO FUNCIONE DEBERAS RESPONDER CONFORME A TU NUMERO SECRETO\n "
+                + "SE RECOMIENDA UNA HOJA Y LAPIZ PARA NO PERDERSE");
 
         PosiblesRespuestas.clear();
         for (int i = 1000; i <= 9999; i++) {
