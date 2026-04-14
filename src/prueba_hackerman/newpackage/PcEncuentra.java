@@ -33,6 +33,7 @@ public class PcEncuentra extends javax.swing.JFrame {
             PosiblesRespuestas.add(i);
         }
         HacerIntento();
+        
         SIntentosPC.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         SIntentosPC.setEditable(false);
         Invisible();

@@ -40,7 +40,7 @@ public class Menu extends javax.swing.JFrame {
                 clipMenu.loop(javax.sound.sampled.Clip.LOOP_CONTINUOUSLY); 
             }
         } catch (Exception e) {
-            System.out.println("HACKERMAN LOG: Error en música de menú -> " + e.getMessage());
+            System.out.println(" Error en música de menú -> " + e.getMessage());
         }
     }
 
