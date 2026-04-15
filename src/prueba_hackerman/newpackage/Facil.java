@@ -91,11 +91,20 @@ public class Facil extends javax.swing.JFrame {
         //tambien se empieza el contador de oportunidades para el usuario
         //que se creo en la clase principal y desde aqui se va restando 
         //cada oportunidad gastada
+        
+        
         try {
+            
             
             int A = Integer.parseInt(EntradaNumero.getText());
             SalidaOportunidades1.setText("OPORTUNIDAD: " + Oportunides + " INTENTOS RESTANTES:" + (Oportunides - 1) + " ");
             Oportunides--;
+            
+            if (A < 1 || A > 100) {
+                Pistas.setText("ERROR: NÚMERO DEBE ESTAR ENTRE 1 Y 100");
+                return;
+            }
+
             if (A < Secreto) {
                 Audio.reproducirEfecto("/Sonidos/errores.wav");
                 Pistas.setText("|FALLIDO: DEBE SER MAYOR|");
